@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "aHy/Yy7kOfm3UwH/6nd7qGWj0DAs7GW2axIxhtJ6AFw=",
+  "Source": "SistemaFactura.API",
+  "BasePath": "_content/SistemaFactura.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

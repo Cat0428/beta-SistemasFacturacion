@@ -1,0 +1,15 @@
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\bin\Debug\net9.0\SistemaFactura.DAL.deps.json
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\bin\Debug\net9.0\SistemaFactura.DAL.runtimeconfig.json
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\bin\Debug\net9.0\SistemaFactura.DAL.dll
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\bin\Debug\net9.0\SistemaFactura.DAL.pdb
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.csproj.AssemblyReference.cache
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.AssemblyInfoInputs.cache
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.AssemblyInfo.cs
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.sourcelink.json
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.dll
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\refint\SistemaFactura.DAL.dll
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.pdb
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\SistemaFactura.DAL.genruntimeconfig.cache
+C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.DAL\obj\Debug\net9.0\ref\SistemaFactura.DAL.dll

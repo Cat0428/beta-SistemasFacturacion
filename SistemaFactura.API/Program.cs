@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Agregar conexión a la base de datos (ejemplo en memoria, si no tienes aún SQL Server)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("SistemaFacturaDB"));  // ✅ Usamos base de datos en memoria por ahora
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Agregar inyección de dependencias de los repositorios
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
