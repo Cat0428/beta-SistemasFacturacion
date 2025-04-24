@@ -9,6 +9,6 @@ namespace SistemaFactura.DAL.Repositories
         {
         }
 
-        // Aquí puedes agregar métodos específicos para Usuario si quieres
+
     }
 }

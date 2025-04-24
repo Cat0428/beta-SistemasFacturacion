@@ -9,6 +9,6 @@ namespace SistemaFactura.DAL.Repositories
         {
         }
 
-        // Métodos específicos para Moneda
+  
     }
 }

@@ -9,6 +9,5 @@ namespace SistemaFactura.DAL.Repositories
         {
         }
 
-        // Métodos específicos para Categoria
     }
 }
