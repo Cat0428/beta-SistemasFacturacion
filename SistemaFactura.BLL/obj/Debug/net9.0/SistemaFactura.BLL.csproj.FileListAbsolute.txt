@@ -14,3 +14,19 @@ C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\Sistema
 C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\refint\SistemaFactura.BLL.dll
 C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.pdb
 C:\Users\Cristian\Desktop\GitHub\ProyectoNCapas\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\ref\SistemaFactura.BLL.dll
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\bin\Debug\net9.0\SistemaFactura.BLL.deps.json
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\bin\Debug\net9.0\SistemaFactura.BLL.dll
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\bin\Debug\net9.0\SistemaFactura.BLL.pdb
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\bin\Debug\net9.0\SistemaFactura.DAL.dll
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\bin\Debug\net9.0\SistemaFactura.DAL.pdb
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.csproj.AssemblyReference.cache
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.AssemblyInfoInputs.cache
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.AssemblyInfo.cs
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.sourcelink.json
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaF.DAC7902E.Up2Date
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.dll
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\refint\SistemaFactura.BLL.dll
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\SistemaFactura.BLL.pdb
+C:\Users\Brian Cadavid\Desktop\GitHub\beta-SistemasFacturacion\SistemaFactura.BLL\obj\Debug\net9.0\ref\SistemaFactura.BLL.dll
