@@ -18,11 +18,11 @@ Este proyecto implementa un sistema básico de facturación utilizando la arquit
 
 ---
 
-## 🏛️ Estructura del Proyecto
+## 🏢 Estructura del Proyecto
 
 ```
 SistemaFactura.API       --> API REST para interactuar con el sistema
-SistemaFactura.BLL       --> Lógica de negocio (vacía en esta versión inicial)
+SistemaFactura.BLL       --> Lógica de negocio: Interfaces y Servicios
 SistemaFactura.DAL
   ├── Context            --> AppDbContext (conexión y configuración de entidades)
   ├── Entities           --> Entidades: Usuario, Gasto, Moneda, Categoria, Presupuesto
@@ -40,7 +40,7 @@ La cadena de conexión está ubicada en `SistemaFactura.API/appsettings.json`:
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=SistemaFacturaDB;Trusted_Connection=True;"
+  "DefaultConnection": "Server=(localdb)\MSSQLLocalDB;Database=SistemaFacturaDB;Trusted_Connection=True;"
 }
 ```
 
@@ -76,7 +76,38 @@ Esto promueve la reutilización de código y facilita el mantenimiento.
 
 ---
 
-## 📜 Endpoints de Prueba
+## 📄 Capa BLL - Lógica de Negocio
+
+La capa BLL incluye:
+
+- **Interfaces** para definir los contratos de servicio (`IUsuarioService`, `IGastoService`, etc.).
+- **Servicios** que implementan las reglas de negocio (`UsuarioService`, `GastoService`, etc.).
+
+Cada servicio:
+- Utiliza los repositorios DAL.
+- Implementa métodos para crear, actualizar, eliminar y consultar datos.
+- Está documentado con **comentarios XML** profesionales para mejorar la legibilidad y soporte de documentación Swagger.
+
+### Comentarios XML
+
+Todos los servicios e interfaces BLL fueron documentados utilizando comentarios XML. Esto permite:
+- Mejorar la navegación en el código (IntelliSense).
+- Generar documentación automática en Swagger.
+
+Configuración de Swagger para leer XML:
+
+```csharp
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
+```
+
+---
+
+## 📓 Endpoints de Prueba
 
 Swagger está configurado en `SistemaFactura.API` para probar los endpoints de manera rápida.
 
@@ -109,12 +140,5 @@ dotnet run --project SistemaFactura.API
 ```
 
 5. Accede a Swagger para probar los endpoints.
-
----
-
-## ✨ Autor
-
-
-Proyecto realizado como parte del Taller de Capa de Datos 2025.
 
 ---
