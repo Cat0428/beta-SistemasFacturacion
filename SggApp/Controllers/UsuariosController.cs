@@ -7,9 +7,9 @@ namespace SggApp.Controllers
 {
     public class UsuariosController : Controller
     {
-        private readonly IUsuariosService _service;
+        private readonly IUsuarioService _service;
 
-        public UsuariosController(IUsuariosService service)
+        public UsuariosController(IUsuarioService service)
         {
             _service = service;
         }

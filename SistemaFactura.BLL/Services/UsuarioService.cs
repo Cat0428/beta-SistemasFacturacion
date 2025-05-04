@@ -7,7 +7,7 @@ namespace SistemaFactura.BLL.Services
     /// <summary>
     /// Servicio que maneja la lógica de negocio relacionada con los usuarios.
     /// </summary>
-    public class UsuarioService : IUsuariosService
+    public class UsuarioService : IUsuarioService
     {
         private readonly UsuarioRepository _usuarioRepository;
 

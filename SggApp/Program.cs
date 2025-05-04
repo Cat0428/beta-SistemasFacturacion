@@ -10,26 +10,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// 👉 Repositorios concretos (sin interfaces)
-builder.Services.AddScoped<CategoriaRepository>();
-builder.Services.AddScoped<GastoRepository>();
-builder.Services.AddScoped<UsuarioRepository>();
-builder.Services.AddScoped<PresupuestoRepository>();
-builder.Services.AddScoped<MonedaRepository>();
+// 👉 Interfaces de servicios (BLL)
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IGastoService, GastoService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IMonedaService, MonedaService>();
+builder.Services.AddScoped<IPresupuestoService, PresupuestoService>();
 
-// 👉 Servicios BLL
-// builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-// builder.Services.AddScoped<IGastoService, GastoService>();
-// builder.Services.AddScoped<ICategoriaService, CategoriaService>();
-// builder.Services.AddScoped<IMonedaService, MonedaService>();
-// builder.Services.AddScoped<IPresupuestoService, PresupuestoService>();
+// 👉 Repositorios concretos (DAL)
+builder.Services.AddScoped<UsuarioRepository>();
+builder.Services.AddScoped<GastoRepository>();
+builder.Services.AddScoped<CategoriaRepository>();
+builder.Services.AddScoped<MonedaRepository>();
+builder.Services.AddScoped<PresupuestoRepository>();
 
 // 👉 MVC
+// Add services to the container
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// 👉 Middleware y configuración por entorno
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -37,9 +38,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseRouting();
+
 app.UseAuthorization();
 
-// 👉 Rutas
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

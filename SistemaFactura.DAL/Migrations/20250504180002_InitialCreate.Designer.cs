@@ -12,7 +12,7 @@ using SistemaFactura.DAL.Context;
 namespace SistemaFactura.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250504173226_InitialCreate")]
+    [Migration("20250504180002_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
