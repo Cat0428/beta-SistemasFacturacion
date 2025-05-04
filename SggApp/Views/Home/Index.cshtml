@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+<div class="text-center mt-5">
+    <h1 class="display-3 text-primary fw-bold">Bienvenido al sistema de gestión de gastos</de></></></span></h1>
+    <p class="lead">Tu sistema inteligente para la gestión de gastos y presupuestos personales</p>
+    
+    <div class="row justify-content-center mt-5 g-4">
+        <div class="col-md-2">
+            <div class="card shadow-lg border-0 h-100 hover-zoom">
+                <div class="card-body text-center">
+                    <i class="fas fa-user fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Usuarios</h5>
+                    <p class="card-text">Administra tus usuarios registrados.</p>
+                    <a asp-controller="Usuarios" asp-action="Index" class="btn btn-outline-primary btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card shadow-lg border-0 h-100 hover-zoom">
+                <div class="card-body text-center">
+                    <i class="fas fa-wallet fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Gastos</h5>
+                    <p class="card-text">Registra y consulta tus gastos.</p>
+                    <a asp-controller="Gastos" asp-action="Index" class="btn btn-outline-success btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card shadow-lg border-0 h-100 hover-zoom">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-pie fa-3x text-danger mb-3"></i>
+                    <h5 class="card-title">Presupuestos</h5>
+                    <p class="card-text">Controla tus presupuestos mensuales.</p>
+                    <a asp-controller="Presupuestos" asp-action="Index" class="btn btn-outline-danger btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card shadow-lg border-0 h-100 hover-zoom">
+                <div class="card-body text-center">
+                    <i class="fas fa-tags fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Categorías</h5>
+                    <p class="card-text">Organiza tus tipos de gastos.</p>
+                    <a asp-controller="Categorias" asp-action="Index" class="btn btn-outline-info btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card shadow-lg border-0 h-100 hover-zoom">
+                <div class="card-body text-center">
+                    <i class="fas fa-coins fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Monedas</h5>
+                    <p class="card-text">Administra tus divisas personalizadas.</p>
+                    <a asp-controller="Monedas" asp-action="Index" class="btn btn-outline-warning btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a asp-controller="Gastos" asp-action="Index" class="btn btn-lg btn-warning fw-bold shadow">Empezar ahora <i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<style>
+    .hover-zoom:hover {
+        transform: translateY(-5px);
+        transition: 0.3s ease-in-out;
+    }
+</style>

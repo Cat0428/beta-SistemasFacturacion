@@ -1,0 +1,37 @@
+@model PresupuestoViewModel
+
+<h2>Create Presupuesto</h2>
+
+<form asp-action="Create" method="post">
+    
+    
+    <div class="mb-3">
+        <label asp-for="Monto" class="form-label"></label>
+        <input asp-for="Monto" class="form-control" type="number" />
+        <span asp-validation-for="Monto" class="text-danger"></span>
+    </div>
+        
+
+    <div class="mb-3">
+        <label asp-for="Mes" class="form-label"></label>
+        <input asp-for="Mes" class="form-control" type="number" />
+        <span asp-validation-for="Mes" class="text-danger"></span>
+    </div>
+        
+
+    <div class="mb-3">
+        <label asp-for="Anio" class="form-label"></label>
+        <input asp-for="Anio" class="form-control" type="number" />
+        <span asp-validation-for="Anio" class="text-danger"></span>
+    </div>
+        
+
+    <div class="mb-3">
+        <label asp-for="UsuarioId" class="form-label"></label>
+        <input asp-for="UsuarioId" class="form-control" type="number" />
+        <span asp-validation-for="UsuarioId" class="text-danger"></span>
+    </div>
+        
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
