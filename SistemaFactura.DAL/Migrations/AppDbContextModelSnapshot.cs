@@ -85,10 +85,6 @@ namespace SistemaFactura.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MonedaId"));
 
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

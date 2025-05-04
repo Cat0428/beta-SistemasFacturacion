@@ -1,57 +1,78 @@
+
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
+using SistemaFactura.BLL.Interfaces;
+using SistemaFactura.DAL.Entities;
 
-public class MonedasController : Controller
+namespace SggApp.Controllers
 {
-    private static List<MonedaViewModel> _data = new();
-
-    public IActionResult Index() => View(_data);
-    public IActionResult Create() => View();
-
-    [HttpPost]
-    public IActionResult Create(MonedaViewModel model)
+    public class MonedasController : Controller
     {
-        if (!ModelState.IsValid) return View(model);
-        model.Id = _data.Count + 1;
-        _data.Add(model);
-        return RedirectToAction("Index");
-    }
+        private readonly IMonedaService _service;
 
-    public IActionResult Edit(int id)
-    {
-        var item = _data.FirstOrDefault(x => x.Id == id);
-        return item == null ? NotFound() : View(item);
-    }
+        public MonedasController(IMonedaService service)
+        {
+            _service = service;
+        }
 
-    [HttpPost]
-    public IActionResult Edit(int id, MonedaViewModel model)
-    {
-        var item = _data.FirstOrDefault(x => x.Id == id);
-        if (item == null) return NotFound();
-        if (!ModelState.IsValid) return View(model);
-item.Nombre = model.Nombre;
-        item.Simbolo = model.Simbolo;
-        return RedirectToAction("Index");
-    }
+        public async Task<IActionResult> Index()
+        {
+            var items = await _service.GetAllAsync();
+            return View(items);
+        }
 
-    public IActionResult Details(int id)
-    {
-        var item = _data.FirstOrDefault(x => x.Id == id);
-        return item == null ? NotFound() : View(item);
-    }
+        public async Task<IActionResult> Details(int id)
+        {
+            var item = await _service.GetByIdAsync(id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
 
-    public IActionResult Delete(int id)
-    {
-        var item = _data.FirstOrDefault(x => x.Id == id);
-        return item == null ? NotFound() : View(item);
-    }
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-    [HttpPost, ActionName("Delete")]
-    public IActionResult DeleteConfirmed(int id)
-    {
-        var item = _data.FirstOrDefault(x => x.Id == id);
-        if (item != null) _data.Remove(item);
-        return RedirectToAction("Index");
+        [HttpPost]
+        public async Task<IActionResult> Create(Moneda item)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.CreateAsync(item);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var item = await _service.GetByIdAsync(id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Moneda item)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateAsync(item);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = await _service.GetByIdAsync(id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

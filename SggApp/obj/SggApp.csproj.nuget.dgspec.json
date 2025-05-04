@@ -34,6 +34,9 @@
             "projectReferences": {
               "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.BLL\\SistemaFactura.BLL.csproj": {
                 "projectPath": "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.BLL\\SistemaFactura.BLL.csproj"
+              },
+              "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj": {
+                "projectPath": "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj"
               }
             }
           }
@@ -63,6 +66,8 @@
               "version": "[9.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.4, )"
             }

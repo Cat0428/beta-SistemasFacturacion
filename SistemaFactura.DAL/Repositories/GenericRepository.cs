@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaFactura.DAL.Context;
+using System.Linq.Expressions;
 
 namespace SistemaFactura.DAL.Repositories
 {
@@ -17,6 +18,10 @@ namespace SistemaFactura.DAL.Repositories
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
+        }
+        public async Task<IEnumerable<T>> GetByConditionAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).ToListAsync();
         }
 
         public async Task<T?> GetByIdAsync(int id)

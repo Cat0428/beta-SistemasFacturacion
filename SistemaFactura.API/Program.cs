@@ -2,7 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using SistemaFactura.DAL.Context;
 using SistemaFactura.DAL.Repositories;
 using SistemaFactura.BLL.Interfaces;
-using SistemaFactura.BLL.Services;
+using SistemaFactura.BLL.Servicios;
+
 
 /// <summary>
 /// Punto de entrada de la aplicación web API.

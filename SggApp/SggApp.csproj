@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SistemaFactura.BLL\SistemaFactura.BLL.csproj" />
+    <ProjectReference Include="..\SistemaFactura.DAL\SistemaFactura.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

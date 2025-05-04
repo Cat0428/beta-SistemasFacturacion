@@ -1,79 +1,78 @@
+
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
+using SistemaFactura.BLL.Interfaces;
+using SistemaFactura.DAL.Entities;
 
-public class GastosController : Controller
+namespace SggApp.Controllers
 {
-    private static List<GastoViewModel> _gastos = new(); // Simula una BD en memoria
-
-    public IActionResult Index()
+    public class GastosController : Controller
     {
-        return View(_gastos);
-    }
+        private readonly IGastoService _service;
 
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult Create(GastoViewModel model)
-    {
-        if (ModelState.IsValid)
+        public GastosController(IGastoService service)
         {
-            model.Id = _gastos.Count + 1;
-            _gastos.Add(model);
-            return RedirectToAction("Index");
+            _service = service;
         }
-        return View(model);
-    }
 
-    public IActionResult Edit(int id)
-    {
-        var gasto = _gastos.FirstOrDefault(g => g.Id == id);
-        if (gasto == null) return NotFound();
-        return View(gasto);
-    }
-
-    [HttpPost]
-    public IActionResult Edit(int id, GastoViewModel model)
-    {
-        var gasto = _gastos.FirstOrDefault(g => g.Id == id);
-        if (gasto == null) return NotFound();
-
-        if (ModelState.IsValid)
+        public async Task<IActionResult> Index()
         {
-            gasto.Descripcion = model.Descripcion;
-            gasto.Monto = model.Monto;
-            gasto.Fecha = model.Fecha;
-            gasto.CategoriaId = model.CategoriaId;
-            return RedirectToAction("Index");
+            var items = await _service.GetAllAsync();
+            return View(items);
         }
-        return View(model);
-    }
 
-    public IActionResult Details(int id)
-    {
-        var gasto = _gastos.FirstOrDefault(g => g.Id == id);
-        if (gasto == null) return NotFound();
-        return View(gasto);
-    }
-
-    public IActionResult Delete(int id)
-    {
-        var gasto = _gastos.FirstOrDefault(g => g.Id == id);
-        if (gasto == null) return NotFound();
-        return View(gasto);
-    }
-
-    [HttpPost, ActionName("Delete")]
-    public IActionResult DeleteConfirmed(int id)
-    {
-        var gasto = _gastos.FirstOrDefault(g => g.Id == id);
-        if (gasto != null)
+        public async Task<IActionResult> Details(int id)
         {
-            _gastos.Remove(gasto);
+            var item = await _service.GetByIdAsync(id);
+            if (item == null) return NotFound();
+            return View(item);
         }
-        return RedirectToAction("Index");
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Gasto item)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.CreateAsync(item);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var item = await _service.GetByIdAsync(id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Gasto item)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateAsync(item);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = await _service.GetByIdAsync(id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
