@@ -33,7 +33,7 @@
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">✏️ Editar</a>
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">ℹ️ Detalles</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?');">🗑️ Eliminar</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️ Eliminar</a>
                         </td>
                     </tr>
                 }
