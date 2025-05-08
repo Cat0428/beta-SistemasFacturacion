@@ -1,6 +1,45 @@
-@* Create view for Categorias with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Create - Categorias</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.CategoriaViewModel
+@{
+    ViewData["Title"] = "Crear Categoría";
+}
+
+<div class="container mt-5">
+    <div class="card border-primary shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4>Crear Nueva Categoría</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" onsubmit="return validarFormulario()">
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="form-control" id="nombre" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4 text-end">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al Menú Principal</a>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        function validarFormulario() {
+            const nombre = document.getElementById("nombre").value.trim();
+
+            if (nombre === "") {
+                alert("El campo Nombre es obligatorio.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+}

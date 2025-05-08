@@ -1,6 +1,48 @@
-@* Index view for Categorias with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Index - Categorias</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model IEnumerable<SggApp.ViewModels.CategoriaViewModel>
+@{
+    ViewData["Title"] = "Listado de Categorías";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Categorías Registradas</h2>
+        <a asp-action="Create" class="btn btn-success">+ Nueva Categoría</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No hay categorías registradas.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover shadow-sm">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Nombre</td>
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-2">Editar</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-2">Detalles</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <div class="mt-4 text-end">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al Menú Principal</a>
+    </div>
 </div>

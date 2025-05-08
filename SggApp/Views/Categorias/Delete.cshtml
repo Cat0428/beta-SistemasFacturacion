@@ -1,6 +1,33 @@
-@* Delete view for Categorias with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Delete - Categorias</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.CategoriaViewModel
+@{
+    ViewData["Title"] = "Eliminar Categoría";
+}
+
+<div class="container mt-5">
+    <div class="card shadow border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4>¿Estás seguro de eliminar esta categoría?</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">@Model.Nombre</dd>
+            </dl>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al Menú Principal</a>
+    </div>
 </div>

@@ -1,5 +1,5 @@
-
 using Microsoft.AspNetCore.Mvc;
+using SggApp.ViewModels;
 using SistemaFactura.BLL.Interfaces;
 using SistemaFactura.DAL.Entities;
 
@@ -16,15 +16,28 @@ namespace SggApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var items = await _service.GetAllAsync();
-            return View(items);
+            var categorias = await _service.GetAllAsync();
+            var viewModelList = categorias.Select(c => new CategoriaViewModel
+            {
+                Id = c.CategoriaId,
+                Nombre = c.Nombre
+            });
+
+            return View(viewModelList);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var c = await _service.GetByIdAsync(id);
+            if (c == null) return NotFound();
+
+            var viewModel = new CategoriaViewModel
+            {
+                Id = c.CategoriaId,
+                Nombre = c.Nombre
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Create()
@@ -33,39 +46,66 @@ namespace SggApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Categoria item)
+        public async Task<IActionResult> Create(CategoriaViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await _service.CreateAsync(item);
+                var categoria = new Categoria
+                {
+                    Nombre = viewModel.Nombre
+                };
+
+                await _service.CreateAsync(categoria);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var c = await _service.GetByIdAsync(id);
+            if (c == null) return NotFound();
+
+            var viewModel = new CategoriaViewModel
+            {
+                Id = c.CategoriaId,
+                Nombre = c.Nombre
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Categoria item)
+        public async Task<IActionResult> Edit(CategoriaViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateAsync(item);
+                var categoria = new Categoria
+                {
+                    CategoriaId = viewModel.Id,
+                    Nombre = viewModel.Nombre
+                };
+
+                await _service.UpdateAsync(categoria);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var c = await _service.GetByIdAsync(id);
+            if (c == null) return NotFound();
+
+            var viewModel = new CategoriaViewModel
+            {
+                Id = c.CategoriaId,
+                Nombre = c.Nombre
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost, ActionName("Delete")]
