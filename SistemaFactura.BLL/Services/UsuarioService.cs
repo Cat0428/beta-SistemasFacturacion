@@ -54,7 +54,7 @@ namespace SistemaFactura.BLL.Services
         /// <param name="usuario">Usuario con los datos actualizados.</param>
         public async Task UpdateAsync(Usuario usuario)
         {
-            _usuarioRepository.UpdateAsync(usuario);
+           await _usuarioRepository.UpdateAsync(usuario);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SistemaFactura.BLL.Services
         {
             var usuario = await _usuarioRepository.GetByIdAsync(id);
             if (usuario != null)
-                _usuarioRepository.DeleteAsync(usuario);
+                await _usuarioRepository.DeleteAsync(usuario); 
         }
-    }
+        }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj": {}
+    "C:\\Users\\Brian Cadavid\\OneDrive\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj": {
+    "C:\\Users\\Brian Cadavid\\OneDrive\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Brian Cadavid\\OneDrive\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj",
         "projectName": "SistemaFactura.DAL",
-        "projectPath": "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj",
+        "projectPath": "C:\\Users\\Brian Cadavid\\OneDrive\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\SistemaFactura.DAL.csproj",
         "packagesPath": "C:\\Users\\Brian Cadavid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\obj\\",
+        "outputPath": "C:\\Users\\Brian Cadavid\\OneDrive\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

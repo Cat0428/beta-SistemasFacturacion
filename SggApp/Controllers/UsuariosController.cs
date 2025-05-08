@@ -1,7 +1,7 @@
-
 using Microsoft.AspNetCore.Mvc;
 using SistemaFactura.BLL.Interfaces;
 using SistemaFactura.DAL.Entities;
+using SggApp.ViewModels;
 
 namespace SggApp.Controllers
 {
@@ -16,15 +16,32 @@ namespace SggApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var items = await _service.GetAllAsync();
-            return View(items);
+            var usuarios = await _service.GetAllAsync();
+            var viewModels = usuarios.Select(u => new UsuarioViewModel
+            {
+                Id = u.UsuarioId,
+                Nombre = u.Nombre,
+                Email = u.Correo,
+                Password = u.Clave
+            }).ToList();
+
+            return View(viewModels);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var usuario = await _service.GetByIdAsync(id);
+            if (usuario == null) return NotFound();
+
+            var viewModel = new UsuarioViewModel
+            {
+                Id = usuario.UsuarioId,
+                Nombre = usuario.Nombre,
+                Email = usuario.Correo,
+                Password = usuario.Clave
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Create()
@@ -33,39 +50,72 @@ namespace SggApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Usuario item)
+        public async Task<IActionResult> Create(UsuarioViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await _service.CreateAsync(item);
+                var usuario = new Usuario
+                {
+                    Nombre = viewModel.Nombre,
+                    Correo = viewModel.Email,
+                    Clave = viewModel.Password
+                };
+
+                await _service.CreateAsync(usuario);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var usuario = await _service.GetByIdAsync(id);
+            if (usuario == null) return NotFound();
+
+            var viewModel = new UsuarioViewModel
+            {
+                Id = usuario.UsuarioId,
+                Nombre = usuario.Nombre,
+                Email = usuario.Correo,
+                Password = usuario.Clave
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Usuario item)
+        public async Task<IActionResult> Edit(UsuarioViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateAsync(item);
+                var usuario = new Usuario
+                {
+                    UsuarioId = viewModel.Id,
+                    Nombre = viewModel.Nombre,
+                    Correo = viewModel.Email,
+                    Clave = viewModel.Password
+                };
+
+                await _service.UpdateAsync(usuario);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var usuario = await _service.GetByIdAsync(id);
+            if (usuario == null) return NotFound();
+
+            var viewModel = new UsuarioViewModel
+            {
+                Id = usuario.UsuarioId,
+                Nombre = usuario.Nombre,
+                Email = usuario.Correo,
+                Password = usuario.Clave
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost, ActionName("Delete")]

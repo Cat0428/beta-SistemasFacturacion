@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace SggApp.ViewModels
+{
 public class MonedaViewModel
 {
     public int Id { get; set; }
@@ -9,4 +11,5 @@ public class MonedaViewModel
 
     [Required]
     public string Simbolo { get; set; }
+}
 }

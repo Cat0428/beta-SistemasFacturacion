@@ -1,6 +1,30 @@
-@* Details view for Usuarios with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Details - Usuarios</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.UsuarioViewModel
+@{
+    ViewData["Title"] = "Detalles del Usuario";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-info">
+        <div class="card-header bg-info text-white">
+            <h4>Detalles del Usuario</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">@Model.Nombre</dd>
+
+                <dt class="col-sm-3">Correo</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+            </dl>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Menú principal</a>
+            </div>
+        </div>
+    </div>
 </div>
+  

@@ -1,6 +1,33 @@
-@* Delete view for Usuarios with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Delete - Usuarios</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.UsuarioViewModel
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4>¿Estás seguro de eliminar este usuario?</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">@Model.Nombre</dd>
+
+                <dt class="col-sm-3">Correo</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+            </dl>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al menú principal</a>
+    </div>
 </div>

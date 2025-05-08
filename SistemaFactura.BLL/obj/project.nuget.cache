@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6pXRTCV5Jgs=",
+  "dgSpecHash": "iA9w+gfahKI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Brian Cadavid\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.BLL\\SistemaFactura.BLL.csproj",
+  "projectFilePath": "C:\\Users\\Brian Cadavid\\OneDrive\\Desktop\\GitHub\\beta-SistemasFacturacion\\SistemaFactura.BLL\\SistemaFactura.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Brian Cadavid\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Brian Cadavid\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
