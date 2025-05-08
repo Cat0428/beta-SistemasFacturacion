@@ -1,6 +1,80 @@
-@* Create view for Gastos with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Create - Gastos</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.GastoViewModel
+
+@{
+    ViewData["Title"] = "Registrar Gasto";
+}
+
+<div class="container mt-5">
+    <div class="card shadow border-primary">
+        <div class="card-header bg-primary text-white">
+            <h4>Registrar nuevo gasto</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" onsubmit="return validarFormulario()">
+                <div class="mb-3">
+                    <label asp-for="Descripcion" class="form-label">Descripción *</label>
+                    <input asp-for="Descripcion" class="form-control" id="descripcion" required />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Fecha" class="form-label">Fecha *</label>
+                    <input asp-for="Fecha" type="date" class="form-control" required />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Monto" class="form-label">Monto *</label>
+                    <input asp-for="Monto" type="number" step="0.01" class="form-control" required />
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="UsuarioId" class="form-label">Usuario *</label>
+                    <select asp-for="UsuarioId" class="form-select" asp-items="Model.Usuarios" required>
+                        <option value="">Seleccione un usuario</option>
+                    </select>
+                    <span asp-validation-for="UsuarioId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CategoriaId" class="form-label">Categoría *</label>
+                    <select asp-for="CategoriaId" class="form-select" asp-items="Model.Categorias" required>
+                        <option value="">Seleccione una categoría</option>
+                    </select>
+                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MonedaId" class="form-label">Moneda *</label>
+                    <select asp-for="MonedaId" class="form-select" asp-items="Model.Monedas" required>
+                        <option value="">Seleccione una moneda</option>
+                    </select>
+                    <span asp-validation-for="MonedaId" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al menú principal</a>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        function validarFormulario() {
+            const descripcion = document.getElementById("descripcion").value.trim();
+            if (descripcion === "") {
+                alert("La descripción es obligatoria.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
