@@ -7,32 +7,33 @@ namespace SggApp.ViewModels
     {
         public int Id { get; set; }
 
-        [Required]
-        public string Descripcion { get; set; }
+        [Required(ErrorMessage = "La descripción es obligatoria.")]
+        public string Descripcion { get; set; } = string.Empty;
 
-        [Required]
-        public DateTime Fecha { get; set; }
+        [Required(ErrorMessage = "La fecha es obligatoria.")]
+        [DataType(DataType.Date)]
+        public DateTime Fecha { get; set; } = DateTime.Today;
 
-        [Required]
+        [Required(ErrorMessage = "El monto es obligatorio.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El monto debe ser mayor que cero.")]
         public decimal Monto { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe seleccionar una categoría.")]
         public int CategoriaId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe seleccionar una moneda.")]
         public int MonedaId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe seleccionar un usuario.")]
         public int UsuarioId { get; set; }
 
-        public string CategoriaNombre { get; set; }
-        public string MonedaNombre { get; set; }
-        public string UsuarioNombre { get; set; }
+        public string CategoriaNombre { get; set; } = string.Empty;
+        public string MonedaNombre { get; set; } = string.Empty;
+        public string UsuarioNombre { get; set; } = string.Empty;
 
-        // 👇 Para los dropdowns en las vistas Create y Edit
-        public IEnumerable<SelectListItem> Categorias { get; set; }
-        public IEnumerable<SelectListItem> Monedas { get; set; }
-        public IEnumerable<SelectListItem> Usuarios { get; set; }
+        // Para listas desplegables
+        public IEnumerable<SelectListItem> Categorias { get; set; } = new List<SelectListItem>();
+        public IEnumerable<SelectListItem> Monedas { get; set; } = new List<SelectListItem>();
+        public IEnumerable<SelectListItem> Usuarios { get; set; } = new List<SelectListItem>();
     }
 }
-    

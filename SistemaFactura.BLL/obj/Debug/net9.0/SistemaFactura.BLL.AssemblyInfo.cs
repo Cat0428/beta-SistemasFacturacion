@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaFactura.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d46f0928f6e3fc64509677e3830c7493c2170836")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3050c77f0c547ad66c1ec49ea7a7f7d2d81082ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaFactura.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaFactura.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

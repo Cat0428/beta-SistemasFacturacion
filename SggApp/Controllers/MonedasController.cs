@@ -1,7 +1,7 @@
-
 using Microsoft.AspNetCore.Mvc;
 using SistemaFactura.BLL.Interfaces;
 using SistemaFactura.DAL.Entities;
+using SggApp.ViewModels;
 
 namespace SggApp.Controllers
 {
@@ -17,14 +17,29 @@ namespace SggApp.Controllers
         public async Task<IActionResult> Index()
         {
             var items = await _service.GetAllAsync();
-            return View(items);
+            var viewModels = items.Select(m => new MonedaViewModel
+            {
+                Id = m.MonedaId,
+                Nombre = m.Nombre,
+                Simbolo = m.Simbolo
+            });
+
+            return View(viewModels);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var m = await _service.GetByIdAsync(id);
+            if (m == null) return NotFound();
+
+            var viewModel = new MonedaViewModel
+            {
+                Id = m.MonedaId,
+                Nombre = m.Nombre,
+                Simbolo = m.Simbolo
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Create()
@@ -33,39 +48,68 @@ namespace SggApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Moneda item)
+        public async Task<IActionResult> Create(MonedaViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await _service.CreateAsync(item);
+                var entidad = new Moneda
+                {
+                    Nombre = viewModel.Nombre,
+                    Simbolo = viewModel.Simbolo
+                };
+
+                await _service.CreateAsync(entidad);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var m = await _service.GetByIdAsync(id);
+            if (m == null) return NotFound();
+
+            var viewModel = new MonedaViewModel
+            {
+                Id = m.MonedaId,
+                Nombre = m.Nombre,
+                Simbolo = m.Simbolo
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Moneda item)
+        public async Task<IActionResult> Edit(MonedaViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateAsync(item);
+                var entidad = new Moneda
+                {
+                    MonedaId = viewModel.Id,
+                    Nombre = viewModel.Nombre,
+                    Simbolo = viewModel.Simbolo
+                };
+
+                await _service.UpdateAsync(entidad);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            if (item == null) return NotFound();
-            return View(item);
+            var m = await _service.GetByIdAsync(id);
+            if (m == null) return NotFound();
+
+            var viewModel = new MonedaViewModel
+            {
+                Id = m.MonedaId,
+                Nombre = m.Nombre,
+                Simbolo = m.Simbolo
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost, ActionName("Delete")]

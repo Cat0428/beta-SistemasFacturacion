@@ -1,6 +1,31 @@
-@* Details view for Monedas with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Details - Monedas</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.MonedaViewModel
+
+@{
+    ViewData["Title"] = "Detalles de Moneda";
+}
+
+<div class="container mt-5">
+    <div class="card shadow border-info">
+        <div class="card-header bg-info text-white">
+            <h4>Detalles de la Moneda</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">@Model.Nombre</dd>
+
+                <dt class="col-sm-3">Símbolo</dt>
+                <dd class="col-sm-9">@Model.Simbolo</dd>
+            </dl>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al menú principal</a>
+    </div>
 </div>
