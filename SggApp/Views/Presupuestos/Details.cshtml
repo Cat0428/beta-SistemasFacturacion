@@ -1,6 +1,36 @@
-@* Details view for Presupuestos with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Details - Presupuestos</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.PresupuestoViewModel
+
+@{
+    ViewData["Title"] = "Detalle del Presupuesto";
+}
+
+<div class="container mt-5">
+    <div class="card shadow border-info">
+        <div class="card-header bg-info text-white">
+            <h4>Detalle del Presupuesto</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Fecha de Inicio</dt>
+                <dd class="col-sm-8">@Model.FechaInicio.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Fecha de Fin</dt>
+                <dd class="col-sm-8">@Model.FechaFin.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Monto</dt>
+                <dd class="col-sm-8">$@Model.Monto</dd>
+
+                <dt class="col-sm-4">Usuario</dt>
+                <dd class="col-sm-8">@Model.UsuarioNombre</dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al menú principal</a>
+    </div>
 </div>

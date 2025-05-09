@@ -1,6 +1,40 @@
-@* Delete view for Presupuestos with Bootstrap *@
-@model dynamic
-<div class="container mt-4">
-  <h2>Delete - Presupuestos</h2>
-  <!-- TODO: Add Bootstrap form/table here -->
+@model SggApp.ViewModels.PresupuestoViewModel
+
+@{
+    ViewData["Title"] = "Eliminar Presupuesto";
+}
+
+<div class="container mt-5">
+    <div class="card shadow border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4>¿Estás seguro de eliminar este presupuesto?</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Fecha de Inicio</dt>
+                <dd class="col-sm-8">@Model.FechaInicio.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Fecha de Fin</dt>
+                <dd class="col-sm-8">@Model.FechaFin.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Monto</dt>
+                <dd class="col-sm-8">$@Model.Monto</dd>
+
+                <dt class="col-sm-4">Usuario</dt>
+                <dd class="col-sm-8">@Model.UsuarioNombre</dd>
+            </dl>
+
+            <form asp-action="DeleteConfirmed" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Volver al menú principal</a>
+    </div>
 </div>
