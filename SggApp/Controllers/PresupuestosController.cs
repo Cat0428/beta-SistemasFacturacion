@@ -55,21 +55,17 @@ namespace SggApp.Controllers
         }
 
         // GET: Create
-        public async Task<IActionResult> Create()
-        {
-            var usuarios = await _usuarioService.GetAllAsync();
-
-            var viewModel = new PresupuestoViewModel
+            public async Task<IActionResult> Create()
             {
-                Usuarios = usuarios.Select(u => new SelectListItem
+                var viewModel = new PresupuestoViewModel
                 {
-                    Value = u.UsuarioId.ToString(),
-                    Text = u.Nombre
-                })
-            };
+                    FechaInicio = DateTime.Now.Date, // ✅ Fecha actual
+                    Usuarios = (await _usuarioService.GetAllAsync())
+                        .Select(u => new SelectListItem { Value = u.UsuarioId.ToString(), Text = u.Nombre })
+                };
 
-            return View(viewModel);
-        }
+                return View(viewModel);
+            }
 
         // POST: Create
         [HttpPost]
