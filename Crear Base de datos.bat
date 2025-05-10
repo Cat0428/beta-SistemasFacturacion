@@ -15,17 +15,26 @@ IF ERRORLEVEL 1 (
     exit /b 1
 )
 
-:: Comprobar si ya existe la carpeta de migraciones
-IF NOT EXIST "SistemaFactura.DAL\Migrations" (
-    echo Creando migración inicial...
-    dotnet ef migrations add Inicial --project SistemaFactura.DAL --startup-project SggApp
+:: Eliminar carpeta de migraciones si existe
+IF EXIST "SistemaFactura.DAL\Migrations" (
+    echo Eliminando carpeta de migraciones existente...
+    rmdir /s /q "SistemaFactura.DAL\Migrations"
 )
 
-echo Aplicando migraciones y creando la base de datos...
+:: Crear migración limpia
+echo Creando nueva migración Inicial...
+dotnet ef migrations add Inicial --project SistemaFactura.DAL --startup-project SggApp
+
+:: Eliminar la base de datos si ya existe
+echo Eliminando la base de datos existente...
+dotnet ef database drop --project SistemaFactura.DAL --startup-project SggApp --force --no-build --yes
+
+:: Crear y aplicar la nueva base de datos
+echo Aplicando migraciones y creando nueva base de datos...
 dotnet ef database update --project SistemaFactura.DAL --startup-project SggApp
 
 IF %ERRORLEVEL% EQU 0 (
-    echo Base de datos creada correctamente.
+    echo Base de datos recreada correctamente.
 ) ELSE (
     echo Error al crear la base de datos.
 )
