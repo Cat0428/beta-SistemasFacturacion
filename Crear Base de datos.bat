@@ -1,39 +1,72 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
 
-:: Configuración del proyecto
-set PROJECT=SistemaFactura.DAL
-set STARTUP=SggApp
-set MIGRATION=Inicial
-set DB_NAME=SistemaFacturacionDB
+:: Establecer ruta base del script
+set "BASEDIR=%~dp0"
+cd /d "%BASEDIR%"
 
-:: Ruta de SQLCMD (asegúrate de tenerlo instalado si quieres validación por SQL)
-set SQLCMD=sqlcmd
+:: Nombre del proyecto DAL y App
+set "DAL_PROJECT=SistemaFactura.DAL"
+set "APP_PROJECT=SggApp"
 
-:: Eliminar carpeta Migrations si existe
-if exist "%PROJECT%\Migrations" (
-    echo Eliminando carpeta de migraciones...
-    rmdir /s /q "%PROJECT%\Migrations"
-)
+:: Nombre de la base de datos (extraído de appsettings.json si quieres)
+set "DB_NAME=SistemaFacturaDB"
 
-:: Crear nueva migración
-echo Creando migración '%MIGRATION%'...
-dotnet ef migrations add %MIGRATION% --project %PROJECT% --startup-project %STARTUP%
+:: Nombre del servidor SQL configurado
+set "SQLSERVER=localhost\SQLEXPRESS"
 
-:: Verificar si existe la base de datos (reemplaza con tu instancia si es diferente)
-echo Verificando si existe la base de datos '%DB_NAME%'...
+echo ------------------------------
+echo CERRANDO SERVICIOS SQL (opcional)...
+echo ------------------------------
+:: net stop MSSQL$SQLEXPRESS >nul 2>&1
 
-%SQLCMD% -Q "IF DB_ID(N'%DB_NAME%') IS NULL PRINT 'NO_EXISTE' ELSE PRINT 'EXISTE'" -h -1 > db_status.txt
-
-set /p DBSTATUS=<db_status.txt
-del db_status.txt
-
-if /I "%DBSTATUS%"=="NO_EXISTE" (
-    echo La base de datos no existe. Creándola...
-    dotnet ef database update --project %PROJECT% --startup-project %STARTUP%
+echo ------------------------------
+echo ELIMINANDO MIGRACIONES ANTERIORES...
+echo ------------------------------
+set "MIGRATIONS_PATH=%BASEDIR%%DAL_PROJECT%\Migrations"
+if exist "%MIGRATIONS_PATH%" (
+    rmdir /s /q "%MIGRATIONS_PATH%"
+    echo ✅ Carpeta de migraciones eliminada.
 ) else (
-    echo ⚠ La base de datos '%DB_NAME%' ya existe. No se aplicó 'database update'.
+    echo ℹ️ No se encontraron migraciones.
 )
 
-endlocal
+echo ------------------------------
+echo ELIMINANDO BASE DE DATOS "%DB_NAME%" SI EXISTE...
+echo ------------------------------
+sqlcmd -S %SQLSERVER% -Q "DROP DATABASE IF EXISTS [%DB_NAME%]"
+if %errorlevel% neq 0 (
+    echo ❌ No se pudo eliminar la base de datos. Verifica que SQL Server esté en ejecución.
+    pause
+    exit /b
+)
+
+echo ------------------------------
+echo CREANDO NUEVA MIGRACIÓN...
+echo ------------------------------
+dotnet ef migrations add Init ^
+    --project "%BASEDIR%%DAL_PROJECT%" ^
+    --startup-project "%BASEDIR%%APP_PROJECT%" ^
+    --output-dir Migrations
+if %errorlevel% neq 0 (
+    echo ❌ Error al crear la migración.
+    pause
+    exit /b
+)
+
+echo ------------------------------
+echo APLICANDO MIGRACIÓN A LA BASE DE DATOS...
+echo ------------------------------
+dotnet ef database update ^
+    --project "%BASEDIR%%DAL_PROJECT%" ^
+    --startup-project "%BASEDIR%%APP_PROJECT%"
+if %errorlevel% neq 0 (
+    echo ❌ Error al aplicar la migración.
+    pause
+    exit /b
+)
+
+echo ------------------------------
+echo ✅ BASE DE DATOS REINICIADA Y ACTUALIZADA CON ÉXITO.
+echo ------------------------------
 pause

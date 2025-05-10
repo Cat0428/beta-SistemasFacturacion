@@ -12,8 +12,8 @@ using SistemaFactura.DAL.Context;
 namespace SistemaFactura.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250504180002_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250510160319_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
