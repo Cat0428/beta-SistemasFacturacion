@@ -62,7 +62,7 @@ dotnet run
 
 ## 👤 Autor
 
-Desarrollado por **Brian Cadavid** como parte del sistema de facturación y control de finanzas personales.
+Desarrollado por **Brian Cadavid Y Cristian López** 
 
 ---
 
