@@ -1,5 +1,7 @@
 # SggApp
 
+esto es una prueba
+
 Aplicación ASP.NET Core MVC para la gestión de gastos y presupuestos personales.
 
 ## Descripción Concisa
