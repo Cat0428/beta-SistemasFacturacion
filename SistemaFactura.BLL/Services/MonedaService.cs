@@ -54,7 +54,7 @@ namespace SistemaFactura.BLL.Services
         /// <param name="moneda">Moneda con los datos actualizados.</param>
         public async Task UpdateAsync(Moneda moneda)
         {
-            _monedaRepository.UpdateAsync(moneda);
+            await _monedaRepository.UpdateAsync(moneda);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SistemaFactura.BLL.Services
         {
             var moneda = await _monedaRepository.GetByIdAsync(id);
             if (moneda != null)
-                _monedaRepository.DeleteAsync(moneda);
+               await _monedaRepository.DeleteAsync(moneda);
         }
     }
 }

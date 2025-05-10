@@ -54,7 +54,7 @@ namespace SistemaFactura.BLL.Services
         /// <param name="categoria">Categoría con los datos actualizados.</param>
         public async Task UpdateAsync(Categoria categoria)
         {
-            _categoriaRepository.UpdateAsync(categoria);
+            await _categoriaRepository.UpdateAsync(categoria);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SistemaFactura.BLL.Services
         {
             var categoria = await _categoriaRepository.GetByIdAsync(id);
             if (categoria != null)
-                _categoriaRepository.DeleteAsync(categoria);
+                await _categoriaRepository.DeleteAsync(categoria);
         }
     }
 }

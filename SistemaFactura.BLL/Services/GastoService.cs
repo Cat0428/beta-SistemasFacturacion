@@ -64,7 +64,7 @@ namespace SistemaFactura.BLL.Services
         /// <param name="gasto">Gasto con los datos actualizados.</param>
         public async Task UpdateAsync(Gasto gasto)
         {
-            _gastoRepository.UpdateAsync(gasto);
+            await _gastoRepository.UpdateAsync(gasto);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace SistemaFactura.BLL.Services
         {
             var gasto = await _gastoRepository.GetByIdAsync(id);
             if (gasto != null)
-                _gastoRepository.DeleteAsync(gasto);
+            await _gastoRepository.DeleteAsync(gasto);
         }
     }
 }

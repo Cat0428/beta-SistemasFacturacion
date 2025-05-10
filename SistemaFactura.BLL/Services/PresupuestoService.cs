@@ -54,7 +54,7 @@ namespace SistemaFactura.BLL.Services
         /// <param name="presupuesto">Presupuesto con los datos actualizados.</param>
         public async Task UpdateAsync(Presupuesto presupuesto)
         {
-            _presupuestoRepository.UpdateAsync(presupuesto);
+           await _presupuestoRepository.UpdateAsync(presupuesto);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SistemaFactura.BLL.Services
         {
             var presupuesto = await _presupuestoRepository.GetByIdAsync(id);
             if (presupuesto != null)
-                _presupuestoRepository.DeleteAsync(presupuesto);
+              await  _presupuestoRepository.DeleteAsync(presupuesto);
         }
     }
 }
