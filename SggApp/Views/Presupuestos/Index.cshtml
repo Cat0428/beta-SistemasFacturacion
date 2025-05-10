@@ -5,49 +5,54 @@
 }
 
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Presupuestos Registrados</h2>
-        <a asp-action="Create" class="btn btn-success">➕Nuevo Presupuesto</a>
+    <div class="card shadow rounded-4 border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Presupuestos Registrados</h4>
+            <a asp-action="Create" class="btn btn-success">
+                <i class="fas fa-plus"></i> Nuevo Presupuesto
+            </a>
+        </div>
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning text-center">No hay presupuestos registrados.</div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Monto</th>
+                                <th>Usuario</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.FechaInicio.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.FechaFin.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Monto.ToString("C")</td>
+                                    <td>@item.UsuarioNombre</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">✏️ Editar</a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">ℹ️ Detalles</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️ Eliminar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
     </div>
 
-    @if (!Model.Any())
-    {
-        <div class="alert alert-warning text-center">
-            No hay presupuestos registrados.
-        </div>
-    }
-    else
-    {
-        <table class="table table-bordered table-hover shadow">
-            <thead class="table-dark">
-                <tr>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
-                    <th>Monto</th>
-                    <th>Usuario</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.FechaInicio.ToString("yyyy-MM-dd")</td>
-                        <td>@item.FechaFin.ToString("yyyy-MM-dd")</td>
-                        <td>@item.Monto.ToString("C")</td>
-                        <td>@item.UsuarioNombre</td>
-                        <td class="text-center">
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">✏️ Editar</a>
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">ℹ️ Detalles</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️ Eliminar</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-
-    <div class="mt-4">
+    <div class="mt-4 text-end">
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">⬅️ Volver al menú principal</a>
     </div>
 </div>

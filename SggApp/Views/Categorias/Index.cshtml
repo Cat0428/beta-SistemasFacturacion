@@ -1,46 +1,52 @@
 @model IEnumerable<SggApp.ViewModels.CategoriaViewModel>
+
 @{
     ViewData["Title"] = "Listado de Categorías";
 }
 
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary">Categorías Registradas</h2>
-        <a asp-action="Create" class="btn btn-success">➕ Nueva Categoría</a>
-    </div>
-
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">No hay categorías registradas.</div>
-    }
-    else
-    {
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover shadow-sm">
-                <thead class="table-primary">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th class="text-center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Nombre</td>
-                            <td class="text-center">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">✏️ Editar</a>
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">ℹ️ Detalles</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️ Eliminar</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div class="card shadow rounded-4 border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Categorías Registradas</h4>
+            <a asp-action="Create" class="btn btn-success">
+                <i class="fas fa-plus"></i> Nueva Categoría
+            </a>
         </div>
-    }
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center">No hay categorías registradas.</div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Nombre</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">✏️ Editar</a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">📘 Detalles</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️ Eliminar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
 
     <div class="mt-4 text-end">
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">⬅️ Volver al menú principal</a>
