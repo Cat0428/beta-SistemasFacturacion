@@ -1,27 +1,39 @@
 @echo off
 setlocal
 
-:: Configura los nombres de los proyectos
-set DAL_PROJECT=SistemaFactura.DAL
-set STARTUP_PROJECT=SggApp
-set MIGRATION_NAME=Inicial
+:: Configuración del proyecto
+set PROJECT=SistemaFactura.DAL
+set STARTUP=SggApp
+set MIGRATION=Inicial
+set DB_NAME=SistemaFacturacionDB
 
-echo ==============================================
-echo == CREAR MIGRACIONES Y ACTUALIZAR LA BD ==
-echo ==============================================
+:: Ruta de SQLCMD (asegúrate de tenerlo instalado si quieres validación por SQL)
+set SQLCMD=sqlcmd
 
-:: 1. Eliminar carpeta Migrations si existe
-echo Eliminando carpeta de migraciones anterior (si existe)...
-rmdir /S /Q %DAL_PROJECT%\Migrations 2>nul
+:: Eliminar carpeta Migrations si existe
+if exist "%PROJECT%\Migrations" (
+    echo Eliminando carpeta de migraciones...
+    rmdir /s /q "%PROJECT%\Migrations"
+)
 
-:: 2. Crear nueva migración
-echo Creando nueva migración '%MIGRATION_NAME%'...
-dotnet ef migrations add %MIGRATION_NAME% --project %DAL_PROJECT% --startup-project %STARTUP_PROJECT%
+:: Crear nueva migración
+echo Creando migración '%MIGRATION%'...
+dotnet ef migrations add %MIGRATION% --project %PROJECT% --startup-project %STARTUP%
 
-:: 3. Aplicar migración
-echo Aplicando migraciones a la base de datos existente...
-dotnet ef database update --project %DAL_PROJECT% --startup-project %STARTUP_PROJECT%
+:: Verificar si existe la base de datos (reemplaza con tu instancia si es diferente)
+echo Verificando si existe la base de datos '%DB_NAME%'...
 
-echo ----------------------------------------------
-echo Migraciones creadas y base de datos actualizada.
+%SQLCMD% -Q "IF DB_ID(N'%DB_NAME%') IS NULL PRINT 'NO_EXISTE' ELSE PRINT 'EXISTE'" -h -1 > db_status.txt
+
+set /p DBSTATUS=<db_status.txt
+del db_status.txt
+
+if /I "%DBSTATUS%"=="NO_EXISTE" (
+    echo La base de datos no existe. Creándola...
+    dotnet ef database update --project %PROJECT% --startup-project %STARTUP%
+) else (
+    echo ⚠ La base de datos '%DB_NAME%' ya existe. No se aplicó 'database update'.
+)
+
+endlocal
 pause
