@@ -15,13 +15,13 @@
 
                 <div class="mb-3">
                     <label asp-for="FechaInicio" class="form-label"></label>
-                    <input asp-for="FechaInicio" class="form-control" type="date" />
+                    <input asp-for="FechaInicio" type="date" class="form-control" id="fechaInicio" required />
                     <span asp-validation-for="FechaInicio" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="FechaFin" class="form-label"></label>
-                    <input asp-for="FechaFin" class="form-control" type="date" />
+                    <input asp-for="FechaFin" type="date" class="form-control" id="fechaFin" required />
                     <span asp-validation-for="FechaFin" class="text-danger"></span>
                 </div>
 
@@ -55,11 +55,19 @@
 @section Scripts {
     <script>
         function validarFormulario() {
-            const monto = parseFloat(document.querySelector('[name="Monto"]').value);
-            if (isNaN(monto) || monto <= 0) {
-                alert("El monto debe ser mayor a 0.");
+            const inicio = new Date(document.getElementById("fechaInicio").value);
+            const fin = new Date(document.getElementById("fechaFin").value);
+
+            if (isNaN(inicio.getTime()) || isNaN(fin.getTime())) {
+                alert("Por favor, seleccione fechas válidas.");
                 return false;
             }
+
+            if (fin < inicio) {
+                alert("La fecha de fin no puede ser anterior a la fecha de inicio.");
+                return false;
+            }
+
             return true;
         }
     </script>

@@ -13,7 +13,8 @@ namespace SggApp.ViewModels
 
         [Required]
         [Display(Name = "Fecha de fin")]
-        public DateTime FechaFin { get; set; }
+        public DateTime FechaFin { get; set; } = DateTime.Now.Date;
+
 
         [Required]
         [Display(Name = "Monto")]
