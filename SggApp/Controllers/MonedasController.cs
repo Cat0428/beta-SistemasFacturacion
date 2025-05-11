@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaFactura.BLL.Interfaces;
 using SistemaFactura.DAL.Entities;
 using SggApp.ViewModels;
 
+
 namespace SggApp.Controllers
 {
+     [Authorize]
     public class MonedasController : Controller
     {
         private readonly IMonedaService _service;

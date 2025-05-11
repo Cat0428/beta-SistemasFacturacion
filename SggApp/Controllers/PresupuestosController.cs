@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SggApp.ViewModels;
@@ -6,6 +7,7 @@ using SistemaFactura.DAL.Entities;
 
 namespace SggApp.Controllers
 {
+     [Authorize]
     public class PresupuestosController : Controller
     {
         private readonly IPresupuestoService _presupuestoService;

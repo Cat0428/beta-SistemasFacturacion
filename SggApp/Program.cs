@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SistemaFactura.DAL.Context;
 using SistemaFactura.DAL.Repositories;
@@ -25,12 +26,20 @@ builder.Services.AddScoped<MonedaRepository>();
 builder.Services.AddScoped<PresupuestoRepository>();
 
 // 👉 MVC
-// Add services to the container
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+// 👉 Autenticación
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";
+        options.LogoutPath = "/Auth/Logout";
+        options.AccessDeniedPath = "/Auth/Login";
+    });
 
-// Configure the HTTP request pipeline
+var app = builder.Build(); // ✅ PRIMERO construir la app
+
+// Middleware pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -39,6 +48,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication(); // ✅ AHORA sí puede ir
 app.UseAuthorization();
 
 app.MapControllerRoute(

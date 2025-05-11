@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaFactura.BLL.Interfaces;
 using SistemaFactura.DAL.Entities;
@@ -5,6 +6,7 @@ using SggApp.ViewModels;
 
 namespace SggApp.Controllers
 {
+     [Authorize]
     public class UsuariosController : Controller
     {
         private readonly IUsuarioService _service;
@@ -21,8 +23,8 @@ namespace SggApp.Controllers
             {
                 Id = u.UsuarioId,
                 Nombre = u.Nombre,
-                Email = u.Correo,
-                Password = u.Clave
+                Email = u.Email,
+                Password = u.Password
             }).ToList();
 
             return View(viewModels);
@@ -37,8 +39,8 @@ namespace SggApp.Controllers
             {
                 Id = usuario.UsuarioId,
                 Nombre = usuario.Nombre,
-                Email = usuario.Correo,
-                Password = usuario.Clave
+                Email = usuario.Email,
+                Password = usuario.Password
             };
 
             return View(viewModel);
@@ -57,8 +59,8 @@ namespace SggApp.Controllers
                 var usuario = new Usuario
                 {
                     Nombre = viewModel.Nombre,
-                    Correo = viewModel.Email,
-                    Clave = viewModel.Password
+                    Email = viewModel.Email,
+                    Password = viewModel.Password
                 };
 
                 await _service.CreateAsync(usuario);
@@ -76,8 +78,8 @@ namespace SggApp.Controllers
             {
                 Id = usuario.UsuarioId,
                 Nombre = usuario.Nombre,
-                Email = usuario.Correo,
-                Password = usuario.Clave
+                Email = usuario.Email,
+                Password = usuario.Password
             };
 
             return View(viewModel);
@@ -92,8 +94,8 @@ namespace SggApp.Controllers
                 {
                     UsuarioId = viewModel.Id,
                     Nombre = viewModel.Nombre,
-                    Correo = viewModel.Email,
-                    Clave = viewModel.Password
+                    Email = viewModel.Email,
+                    Password = viewModel.Password
                 };
 
                 await _service.UpdateAsync(usuario);
@@ -111,8 +113,8 @@ namespace SggApp.Controllers
             {
                 Id = usuario.UsuarioId,
                 Nombre = usuario.Nombre,
-                Email = usuario.Correo,
-                Password = usuario.Clave
+                Email = usuario.Email,
+                Password = usuario.Password
             };
 
             return View(viewModel);

@@ -18,12 +18,12 @@ namespace SistemaFactura.DAL.Entities
         /// <summary>
         /// Correo electrónico del usuario.
         /// </summary>
-        public string Correo { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Clave o contraseña del usuario.
         /// </summary>
-        public string Clave { get; set; }
+        public string Password { get; set; }
 
         /// <summary>
         /// Colección de gastos registrados por el usuario.
@@ -34,5 +34,8 @@ namespace SistemaFactura.DAL.Entities
         /// Colección de presupuestos asignados al usuario.
         /// </summary>
         public ICollection<Presupuesto> Presupuestos { get; set; }
+        public string Rol { get; set; } = "Usuario"; // por defecto
+
+        
     }
 }

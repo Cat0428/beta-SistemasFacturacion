@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SggApp.ViewModels;
 using SistemaFactura.BLL.Interfaces;
 using SistemaFactura.DAL.Entities;
 
+
 namespace SggApp.Controllers
 {
+     [Authorize]
     public class CategoriasController : Controller
     {
         private readonly ICategoriaService _service;

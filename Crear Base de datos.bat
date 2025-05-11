@@ -9,16 +9,22 @@ cd /d "%BASEDIR%"
 set "DAL_PROJECT=SistemaFactura.DAL"
 set "APP_PROJECT=SggApp"
 
-:: Nombre de la base de datos (extraído de appsettings.json si quieres)
+:: Nombre de la base de datos
 set "DB_NAME=SistemaFacturaDB"
 
-:: Nombre del servidor SQL configurado
+:: Nombre del servidor SQL
 set "SQLSERVER=localhost\SQLEXPRESS"
 
 echo ------------------------------
-echo CERRANDO SERVICIOS SQL (opcional)...
+echo VERIFICANDO EF TOOLS...
 echo ------------------------------
-:: net stop MSSQL$SQLEXPRESS >nul 2>&1
+dotnet tool list -g | findstr "ef" >nul
+if errorlevel 1 (
+    echo ❌ Entity Framework Core Tools no está instalado.
+    echo Ejecuta: dotnet tool install --global dotnet-ef
+    pause
+    exit /b
+)
 
 echo ------------------------------
 echo ELIMINANDO MIGRACIONES ANTERIORES...
@@ -26,7 +32,7 @@ echo ------------------------------
 set "MIGRATIONS_PATH=%BASEDIR%%DAL_PROJECT%\Migrations"
 if exist "%MIGRATIONS_PATH%" (
     rmdir /s /q "%MIGRATIONS_PATH%"
-    echo ✅ Carpeta de migraciones eliminada.
+    echo ✅ Migraciones eliminadas.
 ) else (
     echo ℹ️ No se encontraron migraciones.
 )
@@ -36,37 +42,37 @@ echo ELIMINANDO BASE DE DATOS "%DB_NAME%" SI EXISTE...
 echo ------------------------------
 sqlcmd -S %SQLSERVER% -Q "DROP DATABASE IF EXISTS [%DB_NAME%]"
 if %errorlevel% neq 0 (
-    echo ❌ No se pudo eliminar la base de datos. Verifica que SQL Server esté en ejecución.
+    echo ❌ Error al eliminar la base de datos. ¿SQL Server está activo?
     pause
     exit /b
 )
 
 echo ------------------------------
-echo CREANDO NUEVA MIGRACIÓN...
+echo CREANDO NUEVA MIGRACIÓN PARA LOGIN (Email y Password)...
 echo ------------------------------
-dotnet ef migrations add Init ^
+dotnet ef migrations add Init_Login ^
     --project "%BASEDIR%%DAL_PROJECT%" ^
     --startup-project "%BASEDIR%%APP_PROJECT%" ^
     --output-dir Migrations
 if %errorlevel% neq 0 (
-    echo ❌ Error al crear la migración.
+    echo ❌ Error al crear migración.
     pause
     exit /b
 )
 
 echo ------------------------------
-echo APLICANDO MIGRACIÓN A LA BASE DE DATOS...
+echo APLICANDO MIGRACIÓN...
 echo ------------------------------
 dotnet ef database update ^
     --project "%BASEDIR%%DAL_PROJECT%" ^
     --startup-project "%BASEDIR%%APP_PROJECT%"
 if %errorlevel% neq 0 (
-    echo ❌ Error al aplicar la migración.
+    echo ❌ Error al actualizar la base de datos.
     pause
     exit /b
 )
 
 echo ------------------------------
-echo ✅ BASE DE DATOS REINICIADA Y ACTUALIZADA CON ÉXITO.
+echo ✅ MIGRACIÓN COMPLETADA Y LOGIN IMPLEMENTADO.
 echo ------------------------------
 pause

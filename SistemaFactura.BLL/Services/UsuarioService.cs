@@ -67,5 +67,12 @@ namespace SistemaFactura.BLL.Services
             if (usuario != null)
                 await _usuarioRepository.DeleteAsync(usuario); 
         }
+       public async Task<Usuario?> LoginAsync(string email, string password)
+        {
+            var usuarios = await _usuarioRepository.GetAllAsync();
+            return usuarios.FirstOrDefault(u => u.Email == email && u.Password == password);
         }
+
+
+        }   
 }

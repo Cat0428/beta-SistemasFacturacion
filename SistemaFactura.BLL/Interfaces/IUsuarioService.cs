@@ -12,5 +12,7 @@ namespace SistemaFactura.BLL.Interfaces
         Task CreateAsync(Usuario usuario);
         Task UpdateAsync(Usuario usuario);
         Task DeleteAsync(int id);
+        Task<Usuario?> LoginAsync(string email, string password);
+
     }
 }
