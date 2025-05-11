@@ -45,6 +45,12 @@ namespace SistemaFactura.BLL.Services
         /// <param name="usuario">Objeto de usuario a crear.</param>
         public async Task CreateAsync(Usuario usuario)
         {
+            var existentes = await _usuarioRepository.GetAllAsync();
+            if (existentes.Any(u => u.Email.ToLower() == usuario.Email.ToLower()))
+            {
+                throw new InvalidOperationException("Ya existe un usuario con ese correo electrónico.");
+            }
+
             await _usuarioRepository.AddAsync(usuario);
         }
 

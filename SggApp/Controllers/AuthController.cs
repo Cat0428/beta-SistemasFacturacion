@@ -74,8 +74,25 @@ namespace SggApp.Controllers
                 Rol = "Usuario"
             };
 
-            await _usuarioService.CreateAsync(usuario);
-            return RedirectToAction("Login");
+            try
+            {
+                await _usuarioService.CreateAsync(usuario);
+                return RedirectToAction("Login");
+            }
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError("", ex.Message); // Muestra "Ya existe un usuario con ese correo electrónico."
+                return View(model);
+            }
         }
+
+        [HttpGet]
+        public async Task<JsonResult> IsEmailAvailable(string email)
+        {
+            var usuarios = await _usuarioService.GetAllAsync();
+            var existe = usuarios.Any(u => u.Email.ToLower() == email.ToLower());
+            return Json(!existe);
+        }
+
     }
 }

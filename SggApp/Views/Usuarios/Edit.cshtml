@@ -43,7 +43,7 @@
     @Html.Raw(@"<script>
         function validarFormulario() {
             const email = document.getElementById('email').value.trim();
-            const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // ← Corrección aquí
 
             if (!emailRegex.test(email)) {
                 alert('Correo electrónico inválido.');
@@ -52,4 +52,8 @@
             return true;
         }
     </script>")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 }
+
+

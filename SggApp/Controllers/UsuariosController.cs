@@ -52,7 +52,7 @@ namespace SggApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UsuarioViewModel viewModel)
+       public async Task<IActionResult> Create(UsuarioViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -63,9 +63,17 @@ namespace SggApp.Controllers
                     Password = viewModel.Password
                 };
 
-                await _service.CreateAsync(usuario);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _service.CreateAsync(usuario);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("Email", ex.Message);
+                }
             }
+
             return View(viewModel);
         }
 
@@ -126,5 +134,24 @@ namespace SggApp.Controllers
             await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<JsonResult> VerificarEmail(string email)
+        {
+            var usuarios = await _service.GetAllAsync();
+            var existe = usuarios.Any(u => u.Email.ToLower() == email.ToLower());
+            return Json(!existe); // true si está disponible, false si ya existe
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public async Task<IActionResult> IsEmailAvailable(string email, int id)
+        {
+            var usuarios = await _service.GetAllAsync();
+            var existe = usuarios.Any(u => u.Email.ToLower() == email.ToLower() && u.UsuarioId != id);
+            return Json(!existe);
+        }
+
+
     }
 }
