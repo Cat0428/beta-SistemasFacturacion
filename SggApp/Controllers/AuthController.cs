@@ -93,6 +93,33 @@ namespace SggApp.Controllers
             var existe = usuarios.Any(u => u.Email.ToLower() == email.ToLower());
             return Json(!existe);
         }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                ViewBag.Error = "Debe ingresar un correo electrónico.";
+                return View();
+            }
+
+            var usuario = (await _usuarioService.GetAllAsync()).FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+            if (usuario == null)
+            {
+                ViewBag.Error = "No se encontró un usuario con ese correo.";
+                return View();
+            }
+
+            // Mostrar contraseña directamente (temporal / de prueba)
+            ViewBag.Mensaje = $"La contraseña para {usuario.Email} es: {usuario.Password}";
+            return View();
+        }
+
 
     }
 }
