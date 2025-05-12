@@ -119,7 +119,5 @@ namespace SggApp.Controllers
             ViewBag.Mensaje = $"La contraseña para {usuario.Email} es: {usuario.Password}";
             return View();
         }
-
-
     }
 }
