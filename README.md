@@ -66,7 +66,4 @@ Desarrollado por **Brian Cadavid Y Cristian López**
 
 ---
 
-## 📄 Licencia
 
-Este proyecto se distribuye bajo fines educativos.
-prueba
