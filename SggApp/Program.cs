@@ -4,6 +4,7 @@ using SistemaFactura.DAL.Context;
 using SistemaFactura.DAL.Repositories;
 using SistemaFactura.BLL.Interfaces;
 using SistemaFactura.BLL.Services;
+using SistemaFactura.BLL.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LogoutPath = "/Auth/Logout";
         options.AccessDeniedPath = "/Auth/Login";
     });
+    
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<EmailService>();
 
 var app = builder.Build(); // ✅ PRIMERO construir la app
 

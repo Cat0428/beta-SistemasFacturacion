@@ -563,3 +563,7 @@ C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\o
 C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\obj\Debug\net9.0\SggApp.pdb
 C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\obj\Debug\net9.0\SggApp.genruntimeconfig.cache
 C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\obj\Debug\net9.0\ref\SggApp.dll
+C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\bin\Debug\net9.0\MailKit.dll
+C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\bin\Debug\net9.0\MimeKit.dll
+C:\Users\Brian Cadavid\OneDrive\Desktop\GitHub\beta-SistemasFacturacion\SggApp\bin\Debug\net9.0\Templates\PasswordRecoveryTemplate.html

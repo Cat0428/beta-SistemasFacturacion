@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SistemaFactura.DAL\SistemaFactura.DAL.csproj" />
   </ItemGroup>
+  
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>

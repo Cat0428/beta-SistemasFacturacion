@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using SggApp.ViewModels;
 using SistemaFactura.BLL.Interfaces;
+using SistemaFactura.BLL.Services;
 using System.Security.Claims;
 
 namespace SggApp.Controllers
@@ -11,10 +12,12 @@ namespace SggApp.Controllers
     public class AuthController : Controller
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly EmailService _emailService;
 
-        public AuthController(IUsuarioService usuarioService)
+        public AuthController(IUsuarioService usuarioService, EmailService emailService)
         {
             _usuarioService = usuarioService;
+            _emailService = emailService;
         }
 
         public IActionResult Login(string returnUrl = null)
@@ -81,7 +84,7 @@ namespace SggApp.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                ModelState.AddModelError("", ex.Message); // Muestra "Ya existe un usuario con ese correo electrónico."
+                ModelState.AddModelError("", ex.Message);
                 return View(model);
             }
         }
@@ -93,6 +96,7 @@ namespace SggApp.Controllers
             var existe = usuarios.Any(u => u.Email.ToLower() == email.ToLower());
             return Json(!existe);
         }
+
         [HttpGet]
         public IActionResult ForgotPassword()
         {
@@ -115,8 +119,23 @@ namespace SggApp.Controllers
                 return View();
             }
 
-            // Mostrar contraseña directamente (temporal / de prueba)
-            ViewBag.Mensaje = $"La contraseña para {usuario.Email} es: {usuario.Password}";
+            // ✅ Cargar plantilla HTML
+            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "PasswordRecoveryTemplate.html");
+            string templateHtml = await System.IO.File.ReadAllTextAsync(templatePath);
+
+            // ✅ Reemplazar marcadores
+            string cuerpo = templateHtml
+                .Replace("{{NOMBRE}}", usuario.Nombre)
+                .Replace("{{PASSWORD}}", usuario.Password);
+
+            // ✅ Enviar correo
+            await _emailService.EnviarCorreoAsync(
+                usuario.Email,
+                "Recuperación de contraseña - FinApp",
+                cuerpo
+            );
+
+            ViewBag.Mensaje = "La contraseña ha sido enviada a tu correo.";
             return View();
         }
     }
