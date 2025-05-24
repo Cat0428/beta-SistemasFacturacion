@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaFactura.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b1b6147b2695879dde9bfc9d1cce64162ae21d6a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c9b07146af52e04c98ca602f7167653492295a0")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaFactura.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaFactura.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
