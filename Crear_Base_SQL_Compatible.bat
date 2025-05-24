@@ -12,8 +12,12 @@ set "APP_PROJECT=SggApp"
 :: Nombre de la base de datos
 set "DB_NAME=SistemaFacturaDB"
 
-:: Nombre del servidor SQL
-set "SQLSERVER=localhost\SQLEXPRESS"
+:: Nombre del servidor SQL (se puede cambiar por cualquier instancia)
+if "%1"=="" (
+    set "SQLSERVER=(local)"
+) else (
+    set "SQLSERVER=%1"
+)
 
 echo ------------------------------
 echo VERIFICANDO EF TOOLS...
@@ -40,7 +44,7 @@ if exist "%MIGRATIONS_PATH%" (
 echo ------------------------------
 echo ELIMINANDO BASE DE DATOS "%DB_NAME%" SI EXISTE...
 echo ------------------------------
-sqlcmd -S %SQLSERVER% -Q "DROP DATABASE IF EXISTS [%DB_NAME%]"
+sqlcmd -S %SQLSERVER% -Q "IF EXISTS (SELECT name FROM sys.databases WHERE name = N'%DB_NAME%') DROP DATABASE [%DB_NAME%]"
 if %errorlevel% neq 0 (
     echo ❌ Error al eliminar la base de datos. ¿SQL Server está activo?
     pause
