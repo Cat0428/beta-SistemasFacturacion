@@ -12,8 +12,12 @@ set "APP_PROJECT=SggApp"
 :: Nombre de la base de datos
 set "DB_NAME=SistemaFacturaDB"
 
-:: Nombre del servidor SQL
-set "SQLSERVER=localhost\SQLEXPRESS"
+:: Nombre del servidor SQL (se puede cambiar por cualquier instancia)
+if "%1"=="" (
+    set "SQLSERVER=localhost"
+) else (
+    set "SQLSERVER=%1"
+)
 
 echo ------------------------------
 echo VERIFICANDO EF TOOLS...
